@@ -2,10 +2,61 @@
 <html>
 
 <head>
-    <title>Django blog</title>
+    <title>Articles</title>
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:rel=" rel = "stylesheet">
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+    <style>
+        body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px; /* Replace with your desired font size */
+}
+
+header {
+    border-bottom: 1px solid #888; /* Replace with your desired color */
+    margin-bottom: 1rem; /* Adjust the margin as needed */
+    display: flex;
+}
+
+header h1 a {
+    color: red;
+    text-decoration: none;
+}
+
+.nav-left {
+    margin-right: auto;
+}
+
+.nav-right {
+    display: flex;
+    padding-top: 1rem; /* Adjust padding as needed */
+}
+
+.post-entry {
+    margin-bottom: 1rem; /* Adjust margin as needed */
+}
+
+.post-entry h2 {
+    margin: 0.5rem 0; /* Adjust margin as needed */
+}
+
+.post-entry h2 a,
+.post-entry h2 a:visited {
+    color: blue;
+    text-decoration: none;
+}
+
+.post-entry p {
+    margin: 0; /* Reset margin */
+    font-weight: bold; /* Adjust font weight as needed */
+}
+
+.post-entry h2 a:hover {
+    color: red;
+}
+
+    </style>
+    
 </head>
 
 <body>
