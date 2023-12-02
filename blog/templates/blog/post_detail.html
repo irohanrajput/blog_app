@@ -7,6 +7,7 @@
     <p> {{ object.body }} </p>
 </div>
 
-<a href="{% url 'post_edit' post.pk %}"><button>Edit Post</button></a>
+<a href="{% url 'post_edit' post.pk %}"><button>Edit This Blog</button></a>
+<a href="{% url 'post_delete' post.pk %}"><button>Delete This Blog</button></a>
 
 {% endblock content %}   
