@@ -32,8 +32,22 @@
 
         .nav-right {
             display: flex;
+            flex-direction: column;
             padding-top: 1rem;
             /* Adjust padding as needed */
+        }
+
+        
+        .nav-center {
+        display: flex;
+        justify-content: center; /* Center content horizontally */
+        flex-grow: 1; /* Allows the center content to take available space */
+    }
+        
+
+        .buttons {
+            display: flex;
+            margin: auto;
         }
 
         .post-entry {
@@ -62,6 +76,10 @@
         .post-entry h2 a:hover {
             color: red;
         }
+
+        .detailButton {
+        
+        }
     </style>
 </head>
 
@@ -71,21 +89,40 @@
             <div class="nav-left">
                 <h1><a href="{% url 'home' %}">blog_21</a></h1>
             </div>
+
+            <div class="nav-center">
+
+
+                {% if user.is_authenticated %}
+
+                <h3> You are signed in as {{ user.username }} </h3>
+
+                {% else %}
+
+                <h3>Yo, <a href="{% url 'login' %}">Login</a> to create posts.</h3>
+                <h3>A newcomer huh ?? <a href="{% url 'signup' %}">Sign Up</a> to create posts.</h3>
+                
+                {% endif %}
+
+            </div>
+
         
             <div class="nav-right">
-                <a href="{% url 'post_new' %}"><button>+ New Blog Post</button></a>
+                <div class="buttons">
+                    <a href="{% url 'post_new' %}"><button>+ New Blog Post</button></a>
+                </div>
+                <div class="buttons">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"><button>Log Out</button></a>
+
+                    {% else %}
+                        <a href="{% url 'login' %}"><button>Login Now</button></a>
+                    {% endif %}
+                </div>
             </div>
+            
         </header>
 
-        {% if user.is_authenticated %}
-            <p>Hi {{ user.username }}!! </p>
-            <p><a href = "{% url 'logout' %}"><button>Log Out</button></a>
-
-        {% else %}
-            <p>You are not logged in. </p>
-            <a href = "{% url 'login' %}"> <button>Login Now</button> </a>
-        
-        {% endif %}
 
     {% block content %}
     {% endblock content %}

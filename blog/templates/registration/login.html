@@ -1,13 +1,14 @@
 {% extends "blog/base.html" %}
 
-
 {% block content %}
-
+  {% if user.is_authenticated %}
+    <script>window.location.href = "{% url 'home' %}";</script>
+  {% else %}
     <h2>Log In</h2>
     <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Log In</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Log In</button>
     </form>
-
+  {% endif %}
 {% endblock content %}
