@@ -10,18 +10,19 @@ class BlogListView(ListView):
     context_object_name = 'all_posts_list'
     # if in case the context object name is not defined, the default name is object_list
 
-
-
-
 class BlogDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
 
-    
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'blog/post_new.html'
-    fields = '__all__'
+    fields = ('title', 'body')
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        print (f"author: "{form.instance.author})
+        return super().form_valid(form)
 
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Post

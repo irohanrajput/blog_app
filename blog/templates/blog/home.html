@@ -6,7 +6,9 @@
 {% for post in all_posts_list %}
 <div class="post-entry">
     <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
-    <p>{{ post.body|slice:":100" }}..</p>
+    <p>{{ post.body|slice:":200" }}..</p>
+    <p><b>Author: {{post.author.get_full_name }}</b></p>
+</div>
 </div>
 {% endfor %}
 
