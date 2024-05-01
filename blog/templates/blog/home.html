@@ -4,12 +4,59 @@
 {% block content %}
 
 {% for post in all_posts_list %}
-<div class="post-entry">
-    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
-    <p>{{ post.body|slice:":200" }}..</p>
-    <p><b>Author: {{post.author.get_full_name }}</b></p>
-</div>
-</div>
+
+<style>
+    .post-entry {
+        border: 1px solid #ccc;
+        /* Add border */
+        padding: 10px;
+        /* Add padding for spacing */
+        margin-bottom: 20px;
+        /* Add margin for spacing between posts */
+        border-radius: 5px;
+        /* Add rounded corners */
+        overflow: hidden;
+        /* Prevent child elements from overflowing */
+    }
+
+    .post-entry h2 {
+        margin-top: 0;
+        /* Remove default margin for h2 */
+    }
+
+    .post-entry a {
+        text-decoration: none;
+        /* Remove underline from links */
+        color: #333;
+        /* Set link color */
+    }
+
+    .post-entry p {
+        margin: 0;
+        /* Remove default margin for paragraphs */
+    }
+
+    .author-info {
+        font-style: italic;
+        /* Italicize author information */
+        color: #666;
+        /* Set author info color */
+    }
+</style>
+
+
+<a href="{% url 'post_detail' post.pk %}">
+    <div class="post-entry">
+        <div>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.body|slice:":200" }}..</p>
+        </div>
+        <div class="author-info">
+            Author: {{ post.author.get_full_name }}
+        </div>
+    </div>
+</a>
+
 {% endfor %}
 
 

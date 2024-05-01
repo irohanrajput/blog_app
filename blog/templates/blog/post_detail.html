@@ -5,11 +5,18 @@
 <div class="post-entry">               
     <h2>{{ object.title }}</h2>
     <p> {{ object.body }} </p>
+    <!-- <p>Author: {{ object.author.username }}</p>
+    <p>Currently logged in as: {{ request.user.username }}</p> -->
 </div>
 
 <div class="detailButton">
-    <a href="{% url 'post_edit' post.pk %}"><button>Edit This Blog</button></a>
-    <a href="{% url 'post_delete' post.pk %}"><button>Delete This Blog</button></a>
+    {% if object.author.username == request.user.username %}
+
+        <a href="{% url 'post_edit' post.pk %}"><button>Edit This Blog</button></a>
+        <a href="{% url 'post_delete' post.pk %}"><button>Delete This Blog</button></a>
+
+    {% endif %}
+
     <a href="{% url 'home' %}"><button>Get back to home screen</button></a>
 </div>
 

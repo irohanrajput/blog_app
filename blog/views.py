@@ -21,7 +21,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
     
     def form_valid(self, form):
         form.instance.author = self.request.user
-        print (f"author: "{form.instance.author})
+        print (f"author: {form.instance.author}")
         return super().form_valid(form)
 
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
