@@ -1,21 +1,33 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.11-slim
+# Use the official Python image as a base image
+FROM python:3.9
 
-# Set environment variables to prevent Python from writing .pyc files
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# Set environment variables for Python
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Create and set the working directory
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /code
+
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
-COPY requirements.txt /app/
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+COPY requirements.txt /code/
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
-# Copy the Django project files to the Docker image
-COPY . /app/
+# Copy the project code into the container
+COPY . /code/
 
-# Command to run the Django application
+# Make migrations and apply migrations
+RUN python manage.py makemigrations && \
+    python manage.py migrate
+
+# Expose port 8000 to the outside world
 EXPOSE 8000
+
+# Run the Django development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

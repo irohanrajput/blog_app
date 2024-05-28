@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-6gh6%1716l3dn2@fnbw^u%#3*g&3q9_q8$2lcsq^l8cj6bcqli
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 
 # Application definition
@@ -76,12 +76,20 @@ WSGI_APPLICATION = 'blogApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+import os
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dbname',
+        'USER': 'dbuser', #os.environ.get('POSTGRES_USER'),
+        'PASSWORD': 'dbpassword', #os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
+
+
 
 
 # Password validation
@@ -124,6 +132,9 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 
 # Default primary key field type
