@@ -22,9 +22,6 @@ RUN pip install --upgrade pip \
 # Copy the project code into the container
 COPY . /code/
 
-# Make migrations and apply migrations
-RUN python manage.py makemigrations && \
-    python manage.py migrate
 
 # Expose port 8000 to the outside world
 EXPOSE 8000
